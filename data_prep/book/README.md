@@ -12,9 +12,9 @@ mkdir -p data/book/
 python ./book/download.py
 ```
 
-The data in JSON format should be around 119GB after downloading. Using the deduplication file, we remove duplications
+The data in JSON format should be around 119GB after downloading. Using the script `dedup.py`, we remove duplicates
 when combining those two datasets. For deduplication, SIMHASH is used to map each book to a hash value and to remove
-books within a certain distance. Run these commands to install the SIMHASH.
+books within a certain distance. Run the following command to install the SIMHASH library.
 
 ```
 pip install simhash
