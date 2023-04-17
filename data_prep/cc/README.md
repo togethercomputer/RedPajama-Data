@@ -56,8 +56,15 @@ python dedup/dedup_phase2.py FILE_DIR
 We then train a classifier that distinguishes a random CommonCrawl page with a Wikipedia reference. 
 
 ##### Crawling Wikipedia References
+We download the most recent english wikipedia dump at that point - https://dumps.wikimedia.org/enwiki/20230401/ . Unizpping the large bz2 folder with 
 
-In `urls_random.txt`, we provide 38M URLs that are processed from the Wikipedia dump. 
+``` bzip2 -dk enwiki-20230401-pages-articles-multistream.xml.bz2 ``` 
+
+should leave you with an XML file.
+
+To extract all the reference URLs from the XML in a newline delimited text file use the ``` extract_urls.py```. You can specify input and output file. The default output file is `extracted_urls.txt`.
+
+In `extracted_urls.txt`, we provide 38M URLs that are processed from the Wikipedia dump. 
 
 ```
 wget –-timeout=5 -i urls_random.txt --warc-file=warc_wikipedia.warc -O /dev/null
