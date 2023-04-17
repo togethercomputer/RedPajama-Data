@@ -1,6 +1,6 @@
 ### ArXiv
 
-Follow these instructions to create the Arxiv dataset. These steps assume that you are in the `prep/arxiv` directory.
+Follow these instructions to create the Arxiv dataset. These steps assume that you are in the `data_prep/arxiv` directory.
 
 #### Setup
 
