@@ -1,0 +1,16 @@
+{
+    "hash_in_mem": 2,
+    "dump": "2019-09",
+    "num_shards": 4,
+    "num_segments_per_shard": 1,
+    "pipeline": [
+        "fetch_metadata",
+        "split_by_lang"
+    ],
+    "metadata": "test_data2/mined_by_segment",
+    "execution": "debug",
+    "output_dir": "test_data2",
+    "mined_dir": "reproduce",
+    "target_size": "32M",
+    "cache_dir": "test_data/wet_cache"
+}

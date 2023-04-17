@@ -1,0 +1,15 @@
+{
+    "dump": "2019-09",
+    "mined_dir": "mini_by_segment",
+    "pipeline": [
+        "dedup",
+        "lid",
+        "keep_lang",
+        "sp",
+        "lm",
+        "pp_bucket",
+        "minify",
+        "split_by_segment"
+    ],
+    "execution": "slurm"
+}

@@ -1,0 +1,23 @@
+{
+    "hash_in_mem": 2,
+    "dump": "2019-09",
+    "num_shards": 4,
+    "num_segments_per_shard": 1,
+    "mine_num_processes": 0,
+    "lang_whitelist": ["de", "it", "fr"],
+    "pipeline": [
+        "dedup",
+        "lid",
+        "keep_lang",
+        "sp",
+        "lm",
+        "pp_bucket",
+        "minify",
+        "split_by_segment"
+    ],
+    "execution": "debug",
+    "output_dir": "test_data2",
+    "mined_dir": "mined_by_segment",
+    "target_size": "32M",
+    "cache_dir": "test_data/wet_cache"
+}

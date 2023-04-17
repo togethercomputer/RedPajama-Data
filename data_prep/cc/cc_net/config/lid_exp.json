@@ -1,0 +1,12 @@
+{
+  "output_dir": "/checkpoint/guw/cc_clean2/",
+  "dump": "2019-09",
+  "num_shards": 1600,
+  "pipeline": [
+    "lid_before_dedup",
+    "dedup",
+    "lid_after_dedup"
+  ],
+  "hash_in_mem": 50,
+  "execution": "slurm"
+}
