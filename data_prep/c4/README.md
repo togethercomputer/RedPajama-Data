@@ -25,6 +25,7 @@ your machine to downloaded the files (check out the instructions on https://git-
 can clone the repository and get the data by running the following commands from the `data` folder:
 
 ```bash
+cd data/
 GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/datasets/allenai/c4
 cd c4
 git lfs pull --include "en/*"
@@ -34,7 +35,7 @@ This will download ~300GB of (compressed) data.
 
 #### Data Preparation
 
-The only preprocessing step we apply is to bring the data into our own format. To that end, you can run
+The only preprocessing step we apply is to bring the data into our own format. To that end, in `data_prep/c4` folder, you can run
 
 ```bash
 python c4_reformat.py --data_dir ./data/c4/en --output_dir ./data/c4/processed_en --max_files -1
