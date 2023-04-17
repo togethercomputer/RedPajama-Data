@@ -3,8 +3,8 @@
 Follow these instructions to create the GitHub dataset.
 
 We use the public GitHub dataset available on Google BigQuery. We only keep
-projects that are distributed under the MIT, BSD, or Apache license. After downloading downloading the data, we
-implemented further cleaning steps based on different heuristics.
+projects that are distributed under the MIT, BSD, or Apache license. After downloading the data, we
+implement further cleaning steps based on different heuristics.
 
 #### Setup
 
