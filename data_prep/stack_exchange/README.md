@@ -14,6 +14,13 @@ python src/stack_exchange/download.py
 
 Make sure you have `pandas`, `p7zip`, `lxml`, and `tqdm` installed.
 
+You also need to download a fasttext model for language identification and store it in the models directory:
+
+```bash
+mkdir -p data
+wget https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin -P data
+```
+
 #### Processing
 
 > (From Llama paper): We include a dump of Stack Exchange, a website of high quality questions and answers that covers a
