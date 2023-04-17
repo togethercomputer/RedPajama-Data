@@ -9,7 +9,7 @@ To download the dataset, run the following commands.
 
 ```bash
 mkdir -p data/book/
-python src/book/download.py
+python ./book/download.py
 ```
 
 The data in JSON format should be around 119GB after downloading. Using the deduplication file, we remove duplications
@@ -30,15 +30,15 @@ split -a 3 -d -l 2000 ./data/book/books3-train.jsonl ./data/book/split/books3_
 split -a 3 -d -l 2000 ./data/book/pg19-train.jsonl ./data/book/split/pg19_
 cat ./data/book/pg19-test.jsonl > ./data/book/split/pg19_014
 cat ./data/book/pg19-validation.jsonl >> ./data/book/split/pg19_014
-python src/book/dedup.py -w W -k K -l L -n N
+python ./book/dedup.py -w W -k K -l L -n N
 ```
 
-After downloading the dataset, run the following command to count tokens.
+After downloading the dataset, run the following command to count tokens. (Assuming you are in `data_prep`)
 
 ```bash
 rm ./data/book/books3-train.jsonl
 rm ./data/book/pg19-*
-python src/book/token_count.py
+python ./book/token_count.py
 ```
 
 ## License

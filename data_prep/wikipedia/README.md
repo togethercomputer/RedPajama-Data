@@ -19,16 +19,16 @@ See https://github.com/huggingface/datasets/issues/577)
 https://github.com/earwig/mwparserfromhell
 ```
 
-To download the dataset, run the following commands.
+To download the dataset, run the following commands. (Assuming you are in `data_prep`)
 
 ```bash
 mkdir -p data/wikipedia
-python src/wikipedia/download.py
-python src/wikipedia/convert_format.py
+python ./wikipedia/download.py
+python ./wikipedia/convert_format.py
 ```
 
 After downloading the dataset, run the following command to count tokens.
 
 ```bash
-python src/wikipedia/token_count.py
+python ./wikipedia/token_count.py
 ```
