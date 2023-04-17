@@ -1,5 +1,4 @@
 from datasets import load_dataset
-import pickle
 
 book_dataset = load_dataset("the_pile_books3")
 
