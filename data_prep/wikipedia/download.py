@@ -1,5 +1,4 @@
 from datasets import load_dataset
-import pickle
 
 def get_data(lan = "en", date = "20230320"):
     wiki_dataset = load_dataset("wikipedia", language=lan, date=date, beam_runner="DirectRunner")

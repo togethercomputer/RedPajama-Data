@@ -1,6 +1,6 @@
 ### Wikipedia
 
-Follow these instructions to create the Wikipedia dataset.
+Follow these instructions to create the Wikipedia dataset. These steps assume that you are in the `data_prep` directory.
 
 We use the Wikipedia dataset available on Huggingface, which is based on Wikipedia dumps from 2023-03-20 and contains
 text in 20 different languages.
