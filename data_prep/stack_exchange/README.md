@@ -9,7 +9,7 @@ run the following command in the `data_prep` folder:
 
 ```bash
 mkdir -p data
-python src/stack_exchange/download.py
+python ./stack_exchange/download.py
 ```
 
 Make sure you have `pandas`, `p7zip`, `lxml`, and `tqdm` installed.
@@ -34,7 +34,7 @@ wget https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin -P da
 
     ```bash
     # assume you are in the data_prep folder
-    python src/stack_exchange/count.py
+    python ./stack_exchange/count.py
     ```
     It will write the count to `$LEMMA_DATA_DIR_SE/counts.json` (by default `$LEMMA_DATA_DIR_SE=data/stackexchange`).
 
@@ -42,7 +42,7 @@ wget https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin -P da
 
     ```bash
     # assume you are in the data_prep folder
-    python src/stack_exchange/filter.py
+    python ./stack_exchange/filter.py
     ```
     It will write the Q-As pairs to `$LEMMA_DATA_DIR_SE/qa_pairs/` (by default `$LEMMA_DATA_DIR_SE=data/stackexchange`).
 
@@ -50,7 +50,7 @@ wget https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin -P da
 
       ```bash
       # assume you are in the data_prep folder
-      python src/stack_exchange/postprocessing.py
+      python ./stack_exchange/postprocessing.py
       ```
       It will write the Q-As pairs to `$LEMMA_DATA_DIR_SE_OUT/` (by default `$LEMMA_DATA_DIR_SE_OUT=data`).
   
@@ -69,7 +69,7 @@ Finally, we count the number of tokens in the dataset.
 
 ```bash
 # assume you are in the data_prep folder
-python src/stack_exchange/token_count.py
+python ./stack_exchange/token_count.py
 ```
 
 It will write the token count to `$LEMMA_DATA_DIR_SE_OUT/token_counts/tokens.json` (by default `$LEMMA_DATA_DIR_SE_OUT=data`).
