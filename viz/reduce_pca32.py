@@ -24,11 +24,16 @@ if __name__ == "__main__":
         type=str,
         default="~/data/pyjama/features/sentence-transformers/all-MiniLM-L6-v2/",
     )
+    parser.add_argument(
+        "--pattern",
+        type=str,
+        default="*.sampled.npy",
+    )
     args = parser.parse_args()
     dir = os.path.expanduser(args.feature_dir)
 
     # Load in all the files.
-    files = sorted(list(glob(f"{dir}/*.sampled.npy")))
+    files = sorted(list(glob(f"{dir}/{args.pattern}")))
     print(f"Loading {len(files)} files into memory...")
     arrs = [np.load(file) for file in tqdm(files)]
 

@@ -1,14 +1,31 @@
-from sqlalchemy import Column, Integer, String, Text, BigInteger, Float
+import uuid
+
+from sqlalchemy import Column, Integer, String, Text, BigInteger, Float, UUID, ForeignKey
+from sqlalchemy.orm import relationship, Mapped, mapped_column, registry
 from sqlalchemy.ext.declarative import declarative_base
+
 
 Base = declarative_base()
 
+class Document(Base): 
+    __tablename__ = 'documents_sample'
+    id = mapped_column(Integer, primary_key=True, autoincrement=True) #Column(UUID(as_uuid=True), primary_key=True)
+    text = Column(Text)
+    source = Column(Text)
+    github_meta: Mapped["GithubMeta"] = relationship(back_populates="document")
+    arxiv_meta: Mapped["ArxivMeta"] = relationship(back_populates="document")
+    book_meta: Mapped["BookMeta"] = relationship(back_populates="document")
+    stackexchange_meta: Mapped["StackexchangeMeta"] = relationship(back_populates="document")
+    wikipedia_meta: Mapped["WikipediaMeta"] = relationship(back_populates="document")
+    c4_meta: Mapped["C4Meta"] = relationship(back_populates="document")
+    cc_meta: Mapped["CCMeta"] = relationship(back_populates="document")
 
-class Code(Base):
-    __tablename__ = 'code'
-    id = Column(Integer, primary_key=True)
-    document_id = Column(Integer)
-    language = Column(Text)
+
+class GithubMeta(Base):
+    __tablename__ = 'github_meta_sample'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    document_id = mapped_column(ForeignKey("documents_sample.id"))
+    document: Mapped["Document"] = relationship(back_populates="github_meta")
     ref = Column(Text)
     repo_name = Column(Text)
     source = Column(Text)
@@ -16,16 +33,76 @@ class Code(Base):
     content_hash = Column(Text)
     path = Column(Text)
     license = Column(Text)
+    language = Column(Text)
     line_count = Column(Integer)
     max_line_length = Column(Integer)
     avg_line_length = Column(Float)
 
 
-class Document(Base): 
-    __tablename__ = 'documents'
-    id = Column(Integer, primary_key=True)
-    text = Column(Text)
-    num_tokens = Column(Integer)
-    meta = Column(Text)
+class ArxivMeta(Base):
+    __tablename__ = 'arxiv_meta_sample'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    document_id = mapped_column(ForeignKey("documents_sample.id"))
+    document: Mapped["Document"] = relationship(back_populates="arxiv_meta")
+    timestamp = Column(Text)
+    arxiv_id = Column(Text)
+    language = Column(Text)
+    url = Column(Text)
 
 
+class BookMeta(Base):
+    __tablename__ = 'book_meta_sample'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    document_id = mapped_column(ForeignKey("documents_sample.id"))
+    document: Mapped["Document"] = relationship(back_populates="book_meta")
+    title = Column(Text)
+    short_book_title = Column(Text)
+    publication_date = Column(Integer)
+
+class StackexchangeMeta(Base):
+    __tablename__ = 'stackexchange_meta_sample'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    document_id = mapped_column(ForeignKey("documents_sample.id"))
+    document: Mapped["Document"] = relationship(back_populates="stackexchange_meta")
+    question_score = Column(Text)
+    url = Column(Text)
+    timestamp = Column(Text)
+    language = Column(Text)
+
+class WikipediaMeta(Base):
+    __tablename__ = 'wikipedia_meta_sample'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    document_id = mapped_column(ForeignKey("documents_sample.id"))
+    document: Mapped["Document"] = relationship(back_populates="wikipedia_meta")
+    title = Column(Text)
+    url = Column(Text)
+    timestamp = Column(Text)
+    language = Column(Text)
+
+class C4Meta(Base):
+    __tablename__ = 'c4_meta_sample'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    document_id = mapped_column(ForeignKey("documents_sample.id"))
+    document: Mapped["Document"] = relationship(back_populates="c4_meta")
+    url = Column(Text)
+    timestamp = Column(Text)
+    language = Column(Text)
+
+class CCMeta(Base):
+    __tablename__ = 'cc_meta_sample'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    document_id = mapped_column(ForeignKey("documents_sample.id"))
+    document: Mapped["Document"] = relationship(back_populates="cc_meta")
+    cc_source = Column(Text)
+
+   
+# class ArxivMeta(Base):
+#     __tablename__ = 'arxiv_meta_sample'
+#     id = Column(Integer, primary_key=True, autoincrement=True)
+#     document_id = mapped_column(ForeignKey("documents_sample.id"))
+#     document: Mapped["Document"] = relationship(back_populates="arxiv_meta")
+#     document_id = Column(Integer)
+#     timestamp = Column(Text)
+#     arxiv_id = Column(Text)
+#     language = Column(Text)
+#     url = Column(Text)
