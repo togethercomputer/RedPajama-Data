@@ -17,7 +17,7 @@ from google.cloud.sql.connector import Connector  # type: ignore
 from sqlalchemy import Column, String  # type: ignore
 from sqlalchemy.ext.declarative import declarative_base  # type: ignore
 
-from schema import C4Meta, CCMeta, GithubMeta, ArxivMeta, WikipediaMeta, BookMeta, StackexchangeMeta, Document, Base
+from schema import C4Meta, CCMeta, GithubMeta, ArxivMeta, WikipediaMeta, BookMeta, StackexchangeMeta, Document, Base, SourceFile
 
 BATCH_SIZE = 1000
 BASE_DIR = "/home/karan/data/pyjama/RedPajama-Data-1T-Sample"
@@ -101,6 +101,7 @@ for file in tqdm(os.listdir(BASE_DIR)):
     # iterate over the dataframe and insert the data into the database
     documents = []
     for posidx in tqdm(range(len(df))):
+    
         row = df[posidx]
 
         # need to unpack language 
@@ -119,8 +120,11 @@ for file in tqdm(os.listdir(BASE_DIR)):
                 if k != "id" and k != "document_id"
             }
         )
-        # document.github_meta = meta
-        
+        document.source_file = SourceFile(
+            document_id=document.id,
+            filename=file,
+            position=posidx,
+        )        
         setattr(document, f"{source}_meta", meta)
         documents.append(document)
 

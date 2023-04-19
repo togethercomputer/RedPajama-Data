@@ -12,6 +12,7 @@ class Document(Base):
     id = mapped_column(Integer, primary_key=True, autoincrement=True) #Column(UUID(as_uuid=True), primary_key=True)
     text = Column(Text)
     source = Column(Text)
+    source_file: Mapped["SourceFile"] = relationship(back_populates="document")
     github_meta: Mapped["GithubMeta"] = relationship(back_populates="document")
     arxiv_meta: Mapped["ArxivMeta"] = relationship(back_populates="document")
     book_meta: Mapped["BookMeta"] = relationship(back_populates="document")
@@ -19,6 +20,16 @@ class Document(Base):
     wikipedia_meta: Mapped["WikipediaMeta"] = relationship(back_populates="document")
     c4_meta: Mapped["C4Meta"] = relationship(back_populates="document")
     cc_meta: Mapped["CCMeta"] = relationship(back_populates="document")
+    pca: Mapped["PCA"] = relationship(back_populates="document")
+
+class SourceFile(Base):
+    __tablename__ = 'source_files_sample'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    document_id = mapped_column(ForeignKey("documents_sample.id"))
+    document: Mapped["Document"] = relationship(back_populates="source_file")
+    filename = Column(String)
+    position = Column(Integer)
 
 
 class GithubMeta(Base):
@@ -96,13 +107,22 @@ class CCMeta(Base):
     cc_source = Column(Text)
 
    
-# class ArxivMeta(Base):
-#     __tablename__ = 'arxiv_meta_sample'
-#     id = Column(Integer, primary_key=True, autoincrement=True)
-#     document_id = mapped_column(ForeignKey("documents_sample.id"))
-#     document: Mapped["Document"] = relationship(back_populates="arxiv_meta")
-#     document_id = Column(Integer)
-#     timestamp = Column(Text)
-#     arxiv_id = Column(Text)
-#     language = Column(Text)
-#     url = Column(Text)
+class PCA(Base):
+
+    __tablename__ = "pca_sample"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    document_id = mapped_column(ForeignKey("documents_sample.id"))
+    document: Mapped["Document"] = relationship(back_populates="pca")
+    pca_1 = Column(Float)
+    pca_2 = Column(Float)
+    pca_3 = Column(Float)
+    pca_4 = Column(Float)
+    pca_5 = Column(Float)
+    pca_6 = Column(Float)
+    pca_7 = Column(Float)
+    pca_8 = Column(Float)
+    pca_9 = Column(Float)
+    pca_10 = Column(Float)
+
+
