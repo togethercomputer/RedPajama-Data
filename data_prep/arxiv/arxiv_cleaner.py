@@ -367,14 +367,14 @@ def _clean_tex_file(
     # find the first occurence of a \section-like header and replace everything
     # before it with an empty string. This matches the following pattern:
     #   \<section-type>[optional-args]{name}
-    pattern = r"^(.*?)("
-    pattern += r"\\\bchapter\b\*?(?:\[(.*?)\])?\{(.*?)\}|"
-    pattern += r"\\\bpart\b\*?(?:\[(.*?)\])?\{(.*?)\}|"
-    pattern += r"\\\bsection\b\*?(?:\[(.*?)\])?\{(.*?)\}|"
-    pattern += r"\\\bsubsection\b\*?(?:\[(.*?)\])?\{(.*?)\}|"
-    pattern += r"\\\bsubsubsection\b\*?(?:\[(.*?)\])?\{(.*?)\}|"
-    pattern += r"\\\bparagraph\b\*?(?:\[(.*?)\])?\{(.*?)\}"
-    pattern += r"\\\bsubparagraph\b\*?(?:\[(.*?)\])?\{(.*?)\}"
+    pattern = r"^(.*)("
+    pattern += r"\\\bchapter\b\*?(?:\[(.*)\])?\{(.*)\}|"
+    pattern += r"\\\bpart\b\*?(?:\[(.*)\])?\{(.*)\}|"
+    pattern += r"\\\bsection\b\*?(?:\[(.*)\])?\{(.*)\}|"
+    pattern += r"\\\bsubsection\b\*?(?:\[(.*)\])?\{(.*)\}|"
+    pattern += r"\\\bsubsubsection\b\*?(?:\[(.*)\])?\{(.*)\}|"
+    pattern += r"\\\bparagraph\b\*?(?:\[(.*)\])?\{(.*)\}"
+    pattern += r"\\\bsubparagraph\b\*?(?:\[(.*)\])?\{(.*)\}"
     pattern += r")"
 
     # if no section like header is found, then we return an empty string
@@ -460,7 +460,7 @@ def _build_non_arg_macros_dict(file_content: str) -> Dict[str, str]:
         # \newcommand*{\macro_name}{macro_value}
         # where macro_name is only allowed to contain letters and numbers;
         # macro_value can contain any character.
-        pattern=r'\\\bnewcommand\b\*?\{(\\[a-zA-Z0-9]+?)\}\{(.*?)\}$',
+        pattern=r'\\\bnewcommand\b\*?\{(\\[a-zA-Z0-9]+)\}\{(.*)\}$',
         flags=re.MULTILINE
     )
 
@@ -470,7 +470,7 @@ def _build_non_arg_macros_dict(file_content: str) -> Dict[str, str]:
         # \def\macro_name{macro_value}
         # where macro_name is only allowed to contain letters and numbers;
         # macro_value can contain any character.
-        pattern=r'\\def\s*(\\[a-zA-Z0-9]+?)\s*\{(.*?)\}$',
+        pattern=r'\\def\s*(\\[a-zA-Z0-9]+)\s*\{(.*)\}$',
         flags=re.MULTILINE
     )
 
