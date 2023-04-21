@@ -24,7 +24,7 @@ mkdir -p work
 
 #### Data Download
 
-Before runnning the query, make sure to set a destination table and dataset for the query results, and to check the
+Before running the query, make sure to set a destination table and dataset for the query results, and to check the
 "Allow large results" tickbox in the Query settings. Once this is configured, run the following query:
 
 ```sql
