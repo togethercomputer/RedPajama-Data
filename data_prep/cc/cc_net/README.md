@@ -32,24 +32,6 @@ We only tried this on Linux but installation should be possible on MacOS too.
 - `lmplz` and `build_binary` from [KenLM](https://github.com/kpu/kenlm)
 - `spm_train` and `spm_encode` from [Sentence Piece](https://github.com/google/sentencepiece)
 
-## Installation on ETH Euler
-
-1. Create or simlink a `data` folder to where you want to download the corpus.
-2. Load the following modules:
-
-```bash
-module load gcc/8.2.0 python/3.8.5 cmake/3.25.0 boost/1.74.0
-```
-
-3. Create a virtual environment
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
-
-4. Run `make install`. This will download some resources and install required packages.
-
 ## Training Language Models
 
 The `Makefile` is used to train Sentence Piece and LM on Wikipedia data.
