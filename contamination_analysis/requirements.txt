@@ -1,0 +1,2 @@
+zstandard~=0.21.0
+jsonlines~=3.1.0
