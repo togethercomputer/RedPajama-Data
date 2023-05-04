@@ -179,7 +179,6 @@ def main(raw_args):
     if not pipeline:
         parser.print_help()
         return
-    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%file is%%%%%%%%%%%%%%%%%%%%%%%%%%%%%', file)
     run_pipes(*pipeline, file=Path(file), output=Path(output), processes=processes)
 
 
