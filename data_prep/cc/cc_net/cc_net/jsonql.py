@@ -179,7 +179,7 @@ def main(raw_args):
     if not pipeline:
         parser.print_help()
         return
-
+    print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%file is%%%%%%%%%%%%%%%%%%%%%%%%%%%%%', file)
     run_pipes(*pipeline, file=Path(file), output=Path(output), processes=processes)
 
 
@@ -1082,11 +1082,7 @@ class MultiFile(SimpleIO):
 _session = functools.lru_cache()(requests.Session)
 
 
-def request_get_content(url: str, n_retry: int = 3) -> bytes:
-    """Retrieve the binary content at url.
-
-    Retry on connection errors.
-    """
+"""def request_get_content(url: str, n_retry: int = 3) -> bytes:
     t0 = time.time()
     logging.info(f"Starting download of {url}")
     for i in range(1, n_retry + 1):
@@ -1108,19 +1104,25 @@ def request_get_content(url: str, n_retry: int = 3) -> bytes:
     logging.info(
         f"Downloaded {url} [{r.status_code}] took {dl_time:.0f}s ({dl_speed:.1f}kB/s)"
     )
-    return r.content
+    return r.content"""
 
+# 2023.04.26 By Lunzhongwang
+# 重定义request_get_content()，使其打开本地训练数据
+def request_get_content(url: str) -> bytes:
+    with open(url, 'rb') as f:
+        content = f.read()
+        return content
 
 def open_remote_file(url: str, cache: Path = None) -> Iterable[str]:
-    """Download the files at the given url to memory and opens it as a file.
-    Assumes that the file is small, and fetch it when this function is called.
-    """
     if cache and cache.exists():
         return open_read(cache)
 
     # TODO: open the remote file in streaming mode.
     # The hard part is that we need to write the content on disk at the same time,
     # to implement disk caching.
+
+    print('******************url is :', url, '**************************')
+
     raw_bytes = request_get_content(url)
     content = io.BytesIO(raw_bytes)
     if url.endswith(".gz"):
@@ -1138,7 +1140,6 @@ def open_remote_file(url: str, cache: Path = None) -> Iterable[str]:
             tmp_cache.unlink()
 
     return _close_when_exhausted(f)
-
 
 def sharded_file(file_pattern: Path, mode: str, max_size: str = "4G") -> MultiFile:
     folder, name = file_pattern.parent, file_pattern.name

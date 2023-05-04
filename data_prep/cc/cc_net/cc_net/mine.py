@@ -44,6 +44,11 @@ DEFAULT_PIPELINE = [
     "split_by_lang",
 ]
 
+'''
+DEFAULT_PIPELINE = [
+    "dedup"
+]'''
+
 
 class Config(NamedTuple):
     """
@@ -85,7 +90,7 @@ class Config(NamedTuple):
     metadata: Optional[str] = None
     min_len: int = 300
     hash_in_mem: int = 50
-    lang_whitelist: Sequence[str] = []
+    lang_whitelist: Sequence[str] = ["en"]
     lang_blacklist: Sequence[str] = []
     lang_threshold: float = 0.5
     keep_bucket: Sequence[str] = []

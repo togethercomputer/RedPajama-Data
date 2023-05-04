@@ -13,6 +13,7 @@ from multiprocessing import Pool
 #
 jobs = []
 os.chdir(sys.argv[1])
+print('Current dir is : ', os.getcwd())
 for file in glob.glob("*/*.gz"):
     if ("middle" in file or "head" in file) and "dedup" not in file:
         jobs.append(file)
