@@ -27,6 +27,7 @@ import func_argparse
 from cc_net import dedup, execution, jsonql, minify, perplexity, process_wet_file
 from cc_net import regroup as regroup_module
 from cc_net import split_by_lang
+from cc_net import demo_func
 from cc_net.execution import Executor
 
 # Constant
@@ -41,8 +42,11 @@ DEFAULT_PIPELINE = [
     "lm",
     "pp_bucket",
     "drop",
+    "replace",
     "split_by_lang",
 ]
+
+
 
 '''
 DEFAULT_PIPELINE = [
@@ -399,6 +403,10 @@ def _mine_shard(conf: Config, hashes: List[Path], shard: int, output: Path) -> s
         )
     else:
         steps["keep_lang"] = None
+
+    steps["replace"] = demo_func.replace(
+        field="raw_content"
+    )
 
     tok_field = "tokenized"
     steps["sp"] = perplexity.MultiSentencePiece(
