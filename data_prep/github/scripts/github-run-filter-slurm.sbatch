@@ -16,9 +16,9 @@ set -e
 # load modules
 # <PLACEHOLDER to load modules for specific slurm cluster>
 
-DEDUPED_DIR="./data/github_scratch/processed_deduped/"
+DEDUPED_DIR="./data/github/processed_deduped/"
 INPUT_FILE=$(ls ${DEDUPED_DIR}/deduped_*.jsonl | sed -n "${SLURM_ARRAY_TASK_ID}p")
-TARGET_DIR="./data/github_scratch/processed_filtered"
+TARGET_DIR="./data/github/processed_filtered"
 
 mkdir -p logs/github/filter/
 mkdir -p $TARGET_DIR
