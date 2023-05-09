@@ -25,32 +25,16 @@ WET_URL_ROOT = "https://data.commoncrawl.org"
 
 logger = logging.getLogger(__name__)
 
-'''
+
 def cc_wet_paths_url(dump_id: str) -> str:
     return "/".join([WET_URL_ROOT, "crawl-data", "CC-MAIN-" + dump_id, "wet.paths.gz"])
-'''
-#2023.04.26 By Lunzhongwang 
-#获得本地wet地址文件
-def cc_wet_paths_urls(dump_id: str) -> str:
-    return "/".join(["/mnt/cos_shanghai_1/cc-local-read-path", "CC-MAIN-"+dump_id+ "-wet.txt"])
 
-'''
+
 @functools.lru_cache()
 def cc_segments(dump_id: str, cache_dir: Path = None) -> List[str]:
     wet_paths = cc_wet_paths_url(dump_id)
     cache_dir = cache_dir or jsonql._tmp_dir()
     wet_paths_cache = cache_dir / f"wet_{dump_id}.paths.gz"
-    f = jsonql.open_remote_file(wet_paths, cache=wet_paths_cache)
-    #f = jsonql.open_remote_file()
-    return [segment.strip() for segment in f]
-'''
-#2023.04.26 By Lunzhongwang
-#返回dump内的本地语料文件地址（可能涉及缓存操作）
-@functools.lru_cache()
-def cc_segments(dump_id: str, cache_dir: Path = None) -> List[str]:
-    wet_paths = cc_wet_paths_urls(dump_id)
-    cache_dir = cache_dir or jsonql._tmp_dir()
-    wet_paths_cache = cache_dir / f"wet_{dump_id}.paths.txt" # 这个地方和原来的格式不一样了，所以在open_remote_file()中对gz文件操作部分的代码修改为打开txt文件
     f = jsonql.open_remote_file(wet_paths, cache=wet_paths_cache)
     return [segment.strip() for segment in f]
 
@@ -208,11 +192,7 @@ class CCSegmentsReader(Iterable[dict]):
         self.retrieved_segments = 0
 
     def segment_url(self, segment: str):
-        #return "/".join((WET_URL_ROOT, segment))
-        temp = '/' + segment
-        tmp_list = temp.split('\\')
-        res = '/'.join([tmp_list[0], tmp_list[1], tmp_list[2], tmp_list[3], tmp_list[4]])
-        return res
+        return "/".join((WET_URL_ROOT, segment))
 
     @property
     def segments(self) -> Sequence[str]:
@@ -226,7 +206,6 @@ class CCSegmentsReader(Iterable[dict]):
         if not file or not file.exists():
             self.retrieved_segments += 1
 
-        #return jsonql.open_remote_file()
         return jsonql.open_remote_file(url, cache=file)
 
     def __iter__(self) -> Iterator[dict]:
