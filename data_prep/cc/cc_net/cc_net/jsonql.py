@@ -1120,6 +1120,8 @@ def open_remote_file(url: str, cache: Path = None) -> Iterable[str]:
     # The hard part is that we need to write the content on disk at the same time,
     # to implement disk caching.
 
+    print('******************url is :', url, '**************************')
+
     raw_bytes = request_get_content(url)
     content = io.BytesIO(raw_bytes)
     if url.endswith(".gz"):
