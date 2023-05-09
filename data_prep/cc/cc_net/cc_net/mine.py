@@ -45,7 +45,7 @@ DEFAULT_PIPELINE = [
     "replace",
     "split_by_lang",
 ]
-
+import logging
 
 
 '''
@@ -129,7 +129,7 @@ class Config(NamedTuple):
             self.cache_dir.mkdir(exist_ok=True)
             dump_cache = self.cache_dir / self.dump
             dump_cache.mkdir(exist_ok=True)
-
+        
         return process_wet_file.CCShardReader(
             self.dump,
             shard=shard,
@@ -274,8 +274,9 @@ def hashes(conf: Config) -> List[Path]:
     ex(_hashes_shard, repeat(conf), *_transpose(missing_outputs))
 
     # Wait a bit so that files appears on the disk.
+    logging.info("Waiting for hashes to be written on the disk...")
     time.sleep(20)
-    assert all(o.exists() for o in outputs)
+    assert all(o.exists() for o in outputs), f"Missing outputs: {outputs}"
     return outputs
 
 

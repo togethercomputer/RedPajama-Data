@@ -16,7 +16,7 @@ set -e
 # <PLACEHOLDER to load modules for specific slurm cluster>
 
 FIRST_STEP_DIR="./data/github/processed"
-TARGET_DIR="./data/github_scratch/processed_deduped"
+TARGET_DIR="./data/github/processed_deduped"
 
 mkdir -p logs/github/dedupe
 

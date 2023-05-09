@@ -14,7 +14,7 @@ import subprocess
 import urllib.request
 from pathlib import Path
 from typing import Dict
-
+import os
 import func_argparse
 from bs4 import BeautifulSoup  # type: ignore
 
@@ -38,8 +38,8 @@ def opening(file: Path, output: Path = None, n_docs: int = 1_000_000):
         - tokenize: whether to tokenize the text
         - lang: Language code used to chose the tokenizer
     """
-    assert file.exists()
-    return jsonql.run_pipes(
+    assert file.exists(), f"{file} does not exist"
+    jsonql.run_pipes(
         functools.partial(extract_opening_text, n_docs=n_docs),
         file=file,
         output=tmp(output) if output else None,
@@ -116,8 +116,12 @@ def get_cirrus_urls(date: str = None) -> Dict[str, str]:
 
 
 def wget(url: str, output: Path):
-    subprocess.run(["wget", url, "-O", tmp(output), "-q"], check=True)
-    tmp(output).replace(output)
+    if not os.path.isfile(output):
+        subprocess.run(["wget", url, "-O", tmp(output), "-q"], check=True)
+        tmp(output).replace(output)
+    else:
+        print(f"File {tmp(output)} already exists, skipping download")
+
     assert (
         output.stat().st_size > 10_000
     ), f"File {output} downloaded from {url} looks too small"
