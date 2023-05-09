@@ -27,7 +27,7 @@ import func_argparse
 from cc_net import dedup, execution, jsonql, minify, perplexity, process_wet_file
 from cc_net import regroup as regroup_module
 from cc_net import split_by_lang
-from cc_net import demo_func
+from cc_net import roots_func
 from cc_net.execution import Executor
 
 # Constant
@@ -42,7 +42,6 @@ DEFAULT_PIPELINE = [
     "lm",
     "pp_bucket",
     "drop",
-    "replace",
     "split_by_lang",
 ]
 import logging
@@ -103,6 +102,9 @@ class Config(NamedTuple):
     pipeline: Sequence[str] = DEFAULT_PIPELINE
     experiments: Sequence[str] = []
     cache_dir: Optional[Path] = None
+    text_min_length: int = 15
+    text_min_bytes: int = 500
+    
 
     def get_executor(
         self, name: str, timeout_hour: int = 1, mem_gb: int = 1, cpus: int = 1
@@ -400,8 +402,14 @@ def _mine_shard(conf: Config, hashes: List[Path], shard: int, output: Path) -> s
     else:
         steps["keep_lang"] = None
 
-    steps["replace"] = demo_func.replace(
-        field="raw_content"
+    steps["filter_small_doc"] = roots_func.filter_small_doc(
+        field="raw_content", 
+        text_min_length=conf.text_min_length
+    )
+
+    steps["filter_small_docs_by_bytes"] = roots_func.filter_small_docs_by_bytes(
+        field="raw_content", 
+        text_min_bytes=conf.text_min_bytes
     )
 
     tok_field = "tokenized"
