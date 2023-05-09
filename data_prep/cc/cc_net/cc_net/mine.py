@@ -47,7 +47,6 @@ DEFAULT_PIPELINE = [
 import logging
 
 
-
 class Config(NamedTuple):
     """
     Mine Common Crawl with the given settings.
@@ -104,7 +103,6 @@ class Config(NamedTuple):
     cache_dir: Optional[Path] = None
     text_min_length: int = 15
     text_min_bytes: int = 500
-    
 
     def get_executor(
         self, name: str, timeout_hour: int = 1, mem_gb: int = 1, cpus: int = 1
@@ -126,7 +124,7 @@ class Config(NamedTuple):
             self.cache_dir.mkdir(exist_ok=True)
             dump_cache = self.cache_dir / self.dump
             dump_cache.mkdir(exist_ok=True)
-        
+
         return process_wet_file.CCShardReader(
             self.dump,
             shard=shard,
@@ -302,9 +300,7 @@ def mine(conf: Config) -> List[Path]:
         outputs = [mined_dir / f"{shard:04d}" for shard in shard_range]
     else:
         # Files otherwise
-        outputs = [
-            mined_dir / f"{shard:04d}.json.gz" for shard in shard_range
-        ]
+        outputs = [mined_dir / f"{shard:04d}.json.gz" for shard in shard_range]
 
     if "mini_again" in conf.experiments:
         mined_dir = conf.output_dir / "mini_again" / conf.dump
@@ -403,13 +399,11 @@ def _mine_shard(conf: Config, hashes: List[Path], shard: int, output: Path) -> s
         steps["keep_lang"] = None
 
     steps["filter_small_doc"] = roots_func.filter_small_doc(
-        field="raw_content", 
-        text_min_length=conf.text_min_length
+        field="raw_content", text_min_length=conf.text_min_length
     )
 
     steps["filter_small_docs_by_bytes"] = roots_func.filter_small_docs_by_bytes(
-        field="raw_content", 
-        text_min_bytes=conf.text_min_bytes
+        field="raw_content", text_min_bytes=conf.text_min_bytes
     )
 
     tok_field = "tokenized"
