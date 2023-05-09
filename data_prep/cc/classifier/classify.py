@@ -19,14 +19,21 @@ for file in glob.glob("*/*.gz"):
 
 print("TOTAL # JOBS:", len(jobs))
 
+
 # For each row, run classifier and output
 #    (text: [...], source, pred_label, pred_label_prob, wiki_prob)
 #
 def run(job):
+    meta_fields = [
+        'url', 'date_download', 'digest', 'length', 'nlines',
+        'source_domain', 'title', 'raw_content', 'original_nlines',
+        'original_length', 'language', 'language_score',
+        'perplexity'
+    ]
 
     import fasttext
     model = fasttext.load_model("../fastText/model.bin")
-    
+
     print(job)
     ofile = gzip.open(job + ".dedup.classifier.gz", "wt")
     ostat = open(job + ".dedup.classifier.gz.stat", "wt")
@@ -35,7 +42,7 @@ def run(job):
         result = json.loads(jstr)
         content = result["raw_content"]
         output = {}
-        
+
         # run classifier
         text = " ".join(content.strip().splitlines())
         pred = model.predict(text)
@@ -46,20 +53,24 @@ def run(job):
         if pred_label == "__label__cc":
             wiki_prob = 1 - wiki_prob
 
-        output["pred_label"] = pred_label
-        output["pred_label_prob"] = pred_prob[0]
-        output["wiki_prob"] = wiki_prob
+        # collect metadata
+        output["meta"] = {k: result[k] for k in meta_fields}  # ccnet metadata
+        output["meta"]["pred_label"] = pred_label
+        output["meta"]["pred_label_prob"] = pred_prob[0]
+        output["meta"]["wiki_prob"] = wiki_prob
+        output["meta"]["source"] = "cc/" + job + f"/line{line}"
 
+        # text
         output["text"] = content
-        output["source"] = "cc/" + job + f"/line{line}"
         line = line + 1
-        
+
         nchars = len(content)
         ostat.write(f"{nchars}\t{wiki_prob}\n")
         ofile.write(json.dumps(output) + "\n")
-            
+
     ofile.close()
     ostat.close()
+
 
 with Pool(224) as p:
     p.map(run, jobs)

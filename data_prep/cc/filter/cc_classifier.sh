@@ -30,7 +30,7 @@ base_name=${1%.gz}
 temp_file=$(mktemp)
 
 # Filter out the entries with wiki_prob < 0.25 using jq
-gunzip -c "$1" | jq -c 'select(.wiki_prob >= 0.25)' > "$temp_file"
+gunzip -c "$1" | jq -c 'select(.meta.wiki_prob >= 0.25)' > "$temp_file"
 
 # Compress the output file using zstd with .jsonl.zst extension
 zstd -c "$temp_file" > "$base_name.jsonl.zst"
