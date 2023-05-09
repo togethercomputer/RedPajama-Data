@@ -26,7 +26,7 @@ print("TOTAL # JOBS:", len(jobs))
 def run(job):
     meta_fields = [
         'url', 'date_download', 'digest', 'length', 'nlines',
-        'source_domain', 'title', 'raw_content', 'original_nlines',
+        'source_domain', 'title', 'original_nlines',
         'original_length', 'language', 'language_score',
         'perplexity'
     ]
