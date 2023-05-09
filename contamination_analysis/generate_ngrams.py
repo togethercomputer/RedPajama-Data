@@ -99,6 +99,8 @@ def main():
     data_dir = pathlib.Path(args.data_dir)
     out_dir = data_dir / f"{args.n}grams"
 
+    print(f"[{get_timestamp()}] writing {args.n}gram hashes to {out_dir}")
+
     if out_dir.exists():
         raise FileExistsError(f"{out_dir} already exists")
 
@@ -122,8 +124,8 @@ def main():
 
     t0 = time.time()
 
-    print(f"Number of input files: {n_files}")
-    print(f"Number of CPUs: {n_cpus}")
+    print(f"[{get_timestamp()}] number of input files: {n_files}")
+    print(f"[{get_timestamp()}] number of CPUs: {n_cpus}")
     print(f"[{get_timestamp()}] start generating {args.n}-grams")
 
     with mp.Pool(processes=n_cpus) as pool:

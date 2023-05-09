@@ -22,7 +22,7 @@ slice is contaminated.
 
 ## Requirements
 
-The code has been tested with python 3.8 and requires the packages specified in `requirements.txt`.
+The code has been tested with python 3.8.5 and requires the packages specified in `requirements.txt`.
 
 ## Usage
 

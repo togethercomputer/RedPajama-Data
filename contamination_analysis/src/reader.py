@@ -30,11 +30,11 @@ class Reader:
 
     def read(self, text_key: str = "text", yield_meta: bool = False):
         for file in self.input_files:
-            if file.suffix == ".jsonl":
+            if str(file).endswith(".jsonl"):
                 yield from _read_jsonl(
                     file, text_key=text_key, yield_meta=yield_meta
                 )
-            elif file.suffix == ".jsonl.zst":
+            elif str(file).endswith(".jsonl.zst"):
                 yield from _read_jsonl_zst(
                     file, text_key=text_key, yield_meta=yield_meta
                 )
