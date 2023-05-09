@@ -1,9 +1,15 @@
+# This file references code from Repo Name 
+# (https://github.com/bigscience-workshop/data-preparation.git)
+
 from cc_net import jsonql
 
 
 class filter_small_doc(jsonql.Transformer):
-    """Filter txt string, delete parts with less than 10 characters"""
-
+    """
+        Filter txt string, delete parts with less than 10 characters
+        The function is referenced from:
+        https://github.com/bigscience-workshop/data-preparation/blob/main/preprocessing/training/01a_catalogue_cleaning_and_filtering/clean_helpers/filter_small_docs_in_datasets.py   
+    """
     def __init__(self, field, text_min_length=15):
         super().__init__()
         self.field = field
@@ -36,6 +42,8 @@ class filter_small_docs_by_bytes(jsonql.Transformer):
         a byte of text usually turns into 0.3 tokens.
         a 256-token sequence would be ~850 bytes of text.
         I think anywhere from 500 to 1000 min bytes is reasonable.
+        The function is referenced from:
+        https://github.com/bigscience-workshop/data-preparation/blob/main/preprocessing/training/01a_catalogue_cleaning_and_filtering/clean_helpers/filter_small_docs_in_datasets.py
         """
         super().__init__()
         self.field = field
