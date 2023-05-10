@@ -177,10 +177,12 @@ try:
             other.load(str(filename))
             n = len(other)
             keys = np.fromiter(
-                (k for (k, v) in other.items()), dtype=HASH_TYPE, count=n
+                # NOTE() the following code dose not work, because of a bug in getpy
+                # (k for (k, v) in other.items()), dtype=HASH_TYPE, count=n
+                other.keys(), dtype=HASH_TYPE, count=n
             )
             values = np.fromiter(
-                (v for (k, v) in other.items()), dtype=np.uint8, count=n
+                other.keys(), dtype=np.uint8, count=n
             )
             self.merge(keys, values)
 

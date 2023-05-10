@@ -169,4 +169,4 @@ I prepared one single warc.wet.gz on Tencent Cloud COS. The wet_2019-09. path.gz
 
 wget https://gnzw-1317317145.cos.ap-shanghai.myqcloud.com/fjr/wet_2019-09.paths.gz
 
-wget  https://gnzw-1317317145.cos.ap-shanghai.myqcloud.com/fjr/CC-MAIN-20190215183319-20190215205319-00000.warc.wet.gz?q-sign-algorithm=sha1&q-ak=AKIDUpeLdM7SZ2C0OA6BlCRkcRx9FV2T11d3EZBI0OJhCfrXopWRIFObDX9NWhbm5vSd&q-sign-time=1683596857;1683600457&q-key-time=1683596857;1683600457&q-header-list=host&q-url-param-list=&q-signature=953a8d9d696bfec4d92d662502ca50d26d21055a&x-cos-security-token=lTqm8iJSTw4hbUdhMR0HyncaEcdAuR0a6c75d8494f2f90ff5df6501dceeea2f0w2V_p3420oKDw1tCJLDr7tzFLx_LhHX0hYZGwR7TuU0WzbXB0MwrFJvBV5_BsjqMGhG6bb2VzOd5CRj9kL9tbciywSZOOgBCQp8o_yH6qMozBm6Kzbkw-kdAPq4-EVUgxz-5eVeqaGl-wwoZ24oW45AH_NMJQ-q2DNzrRYtphTUVX0P3FXeb1VVTYydXHg1z
+wget  https://gnzw-1317317145.cos.ap-shanghai.myqcloud.com/fjr/CC-MAIN-20190215183319-20190215205319-00000.warc.wet.gz
