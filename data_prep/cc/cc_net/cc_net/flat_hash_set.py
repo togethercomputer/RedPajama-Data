@@ -152,7 +152,7 @@ try:
         """
 
         def __init__(self):
-            super().__init__(HASH_TYPE, np.uint8, default_value=False)
+            super().__init__(np.dtype(HASH_TYPE), np.dtype(np.uint8), default_value=False)
 
         def __contains__(self, h):
             """Returns `True` if the object has been added at list once."""
@@ -173,7 +173,7 @@ try:
 
         def load_gp(self, filename):
             """Override gp.Dict.load, to correctly merge values instead of overwriting."""
-            other = gp.Dict(HASH_TYPE, np.uint8, default_value=False)
+            other = gp.Dict(np.dtype(HASH_TYPE), np.dtype(np.uint8))
             other.load(str(filename))
             n = len(other)
             keys = np.fromiter(
