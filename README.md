@@ -80,6 +80,18 @@ The dataset itself, please refer to the licenses of the data subsets you use.
 
 For full terms, see the LICENSE file. If you have any questions, comments, or concerns about licensing please [contact us](https://www.together.xyz/contact).
 
+To cite RedPajama, please use:
+
+```
+@software{together2023redpajama,
+  author = {Together Computer},
+  title = {RedPajama: An Open Source Recipe to Reproduce LLaMA training dataset},
+  month = April,
+  year = 2023,
+  url = {https://github.com/togethercomputer/RedPajama-Data}
+}
+```
+
 ## Acknowledgement
 
 We are appreciative to the work done by the growing open-source AI community that made this project possible. That includes:
