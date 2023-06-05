@@ -7,6 +7,7 @@ import hashlib
 import multiprocessing as mp
 from typing import Set, Dict, ByteString, Tuple, List
 import joblib
+import string
 
 from src.ngrams import form_ngrams
 
@@ -51,11 +52,23 @@ def parse_test_slice(
     with open(test_fp, "r") as f:
         data = json.load(f)
 
+    # create table to remove punctuation and translate to lowercase
+    translation_table = str.maketrans(
+        # These characters
+        string.ascii_lowercase + string.ascii_uppercase,
+        # Become these characters
+        string.ascii_lowercase * 2,
+        # These are deleted
+        string.punctuation
+    )
+
     # contains the mapping from ngram hash to instance id and parent directory
     hashes_instances_mapping: Dict[ByteString, List[str]] = dict()
 
     for instance in data:
         text = instance["input"]["text"]
+        text = text.translate(translation_table)
+
         instance_id = instance["id"]
 
         for digest in set(
