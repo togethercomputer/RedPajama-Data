@@ -78,7 +78,7 @@ The second step is to merge all chunks and perform a global deduplication. Final
 save the filenames into separate text files:
 
 ```bash
-bash scripts/github-prepare-local-dedup.sh
+bash scripts/github-prepare-clean.sh
 ```
 
 These can then be processed in parallel using slurm:
