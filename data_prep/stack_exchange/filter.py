@@ -4,7 +4,7 @@ import sys
 import xml.etree.ElementTree as ET
 from tqdm import tqdm
 sys.path.append("./")
-from src.stack_exchange.count import get_sites_count
+from count import get_sites_count
 
 LEMMA_DATA_DIR_SE = os.environ.get("LEMMA_DATA_DIR_SE", "./data/")
 
