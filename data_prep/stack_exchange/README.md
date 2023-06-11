@@ -5,11 +5,11 @@ Follow these instructions to create the Stack Exchange dataset.
 #### Data Download
 
 We download the StackExchange data dump from [here](https://archive.org/download/stackexchange). To start downloading,
-run the following command in the `data_prep` folder:
+run the following command in the `stack_exchange` folder:
 
 ```bash
 mkdir -p data
-python ./stack_exchange/download.py
+python download.py
 ```
 
 Make sure you have `pandas`, `p7zip`, `lxml`, and `tqdm` installed.
@@ -50,7 +50,7 @@ wget https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin -P da
 
       ```bash
       # assume you are in the data_prep folder
-      python ./stack_exchange/postprocessing.py
+      python ./stack_exchange/post_processing.py 
       ```
       It will write the Q-As pairs to `$LEMMA_DATA_DIR_SE_OUT/` (by default `$LEMMA_DATA_DIR_SE_OUT=data`).
   
