@@ -3,7 +3,7 @@ import json
 from tqdm import tqdm
 import xml.etree.ElementTree as ET
 
-LEMMA_DATA_DIR_SE = os.environ.get("LEMMA_DATA_DIR_SE", "./data/stack_exchange/")
+LEMMA_DATA_DIR_SE = os.environ.get("LEMMA_DATA_DIR_SE", "./data/")
 
 def get_sites_count(path=LEMMA_DATA_DIR_SE):
     sites = os.listdir(path)
