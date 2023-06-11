@@ -14,7 +14,7 @@ def get_token_count(qa_pair):
     # return len(enc.encode(qa_pair['text']))
     return len(enc.tokenize(qa_pair['text']))
 
-LEMMA_DATA_DIR_SE_OUT = os.environ.get("LEMMA_DATA_DIR_SE_OUT", "./stackexchange/")
+LEMMA_DATA_DIR_SE_OUT = os.environ.get("LEMMA_DATA_DIR_SE_OUT", "./data/")
 
 # if x is a file, not a dir
 sites = [x for x in os.listdir(os.path.join(LEMMA_DATA_DIR_SE_OUT)) if os.path.isfile(os.path.join(LEMMA_DATA_DIR_SE_OUT, x))]
@@ -22,6 +22,7 @@ sites = [x for x in os.listdir(os.path.join(LEMMA_DATA_DIR_SE_OUT)) if os.path.i
 os.makedirs(os.path.join(LEMMA_DATA_DIR_SE_OUT, "token_counts"), exist_ok=True)
 
 token_counts = {}
+sites = [site for site in sites if site.endswith('.jsonl')]
 for site in sites:
     print(f"[INFO] Processing {site}...")
     with open(os.path.join(LEMMA_DATA_DIR_SE_OUT, site), "r") as f:
