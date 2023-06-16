@@ -130,7 +130,6 @@ dmypy.json
 
 # temporary files
 data_prep/data
-*.csv
 *.sav
 data_prep/src/cc/log.txt
 data_prep/src/cc/inference_output.json

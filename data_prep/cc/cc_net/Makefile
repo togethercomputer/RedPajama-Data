@@ -1,6 +1,7 @@
 # Makefile to install CC-Net and train the LMs.
 # `make` or `make help` to get some help.
 
+
 # Arguments:
 lang?=en
 process?=8
@@ -58,6 +59,7 @@ dl_lm:
 lm: data/lm_sp/$(lang).sp.model data/lm_sp/$(lang).arpa.bin
 	# Computes a 5-gram LM for the given language -> make lang=it lm
 	# Restricted to the first NDOC_FOR_LM documents
+	mkdir -p data/lm_sp
 
 sp: data/lm_sp/$(lang).sp.model
 	# Train a sentence piece model on Wikipedia -> make lang=it sp
@@ -111,20 +113,21 @@ data/lm_sp/%.sp.model: data/cirrus/txt/%.opening.txt
 	echo "Trained SentencePiece model with `wc -l $(basename $@).vocab` pieces"
 
 data/cirrus/sp/%.opening.txt: data/cirrus/gz/%.json.gz data/lm_sp/%.sp.model
+	mkdir -p data/cirrus/sp
 	$(SPM_ENCODE) \
 		--model=$(word 2,$^) \
 		--output_format=piece \
-			< <(python get_wiki_cirrus.py opening --file $< --n_docs $(NDOC_FOR_LM)) \
+			< <(python cc_net/get_wiki_cirrus.py opening --file $< --n_docs $(NDOC_FOR_LM)) \
 			> $@
 
 data/cirrus/txt/%.opening.txt: data/cirrus/gz/%.json.gz
-	python get_wiki_cirrus.py opening \
+	python cc_net/get_wiki_cirrus.py opening \
 		--n_docs $(NDOC_FOR_LM) \
 		--file $< --output $@
 
 data/cirrus/gz/%.json.gz:
-	mkdir $(@D)
-	python get_wiki_cirrus.py dl --lang $(call get_lang,$(@F)) --output_dir $(@D)
+	mkdir -p $(@D)
+	python cc_net/get_wiki_cirrus.py dl --lang $(call get_lang,$(@F)) --output_dir $(@D)
 
 clean:
 	# Remove intemediary files, dataset, third_party sources
@@ -155,11 +158,8 @@ bin/lmplz: third_party/kenlm
 third_party/sentencepiece:
 	# Download sentencepiece sources: https://github.com/google/sentencepiece
 	mkdir -p $(@D)
-	wget -c -O $(@D)/sentencepiece.zip https://github.com/google/sentencepiece/archive/v0.1.83.zip
-	unzip -o -d $(@D) $(@D)/sentencepiece.zip
-	rm $(@D)/sentencepiece.zip
-	# remove the version id from the folder name
-	mv $(@D)/sentencepiece-* $@
+	git clone https://github.com/google/sentencepiece.git $(@D)/sentencepiece
+
 
 bin/spm_train: third_party/sentencepiece
 	# Compiles sentencepiece binaries
@@ -172,7 +172,10 @@ bin/spm_train: third_party/sentencepiece
 	# $ cd $</build
 	# $ sudo make install
 	# $ sudo ldconfig -v
-
+	# if using MAC OS
+	# ifeq ($(shell uname -s),Darwin)
+	# 	sudo update_dyld_shared_cache
+	
 test:
 	python -m cc_net mine --config test
 	mkdir -p test_data/mini
