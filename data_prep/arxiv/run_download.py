@@ -5,6 +5,7 @@ import configparser
 import itertools
 import numpy as np
 import pathlib
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--aws_config', type=str, help='aws config file')
@@ -32,7 +33,7 @@ class ArxivDownloader:
             's3',  # the AWS resource we want to use
             aws_access_key_id=configs['DEFAULT']['ACCESS_KEY'],
             aws_secret_access_key=configs['DEFAULT']['SECRET_KEY'],
-            region_name='us-east-1'  # same region arxiv bucket is in
+            region_name='us-east-1',  # same region arxiv bucket is in      
         )
 
     def run(self, input_file: str, tgt_dir: pathlib.Path, max_files=-1):
@@ -51,8 +52,15 @@ class ArxivDownloader:
                 break
 
     def __download_file(self, key, tgt_dir: pathlib.Path):
+        filename = pathlib.Path(tgt_dir, key)
         print('\nDownloading s3://arxiv/{} t'
-              'o {}...'.format(key, pathlib.Path(tgt_dir, key)))
+              'o {}...'.format(key, filename))
+        
+        if filename.exists():
+            print(f'File {filename} already exists, skipping download...')
+            return
+        
+        print('\nDownloading s3://arxiv/{} to {}...'.format(key, filename))
 
         try:
             self.s3resource.meta.client.download_file(
