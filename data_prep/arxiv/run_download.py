@@ -51,9 +51,16 @@ class ArxivDownloader:
                 break
 
     def __download_file(self, key, tgt_dir: pathlib.Path):
+        filename = pathlib.Path(tgt_dir, key)
         print('\nDownloading s3://arxiv/{} t'
-              'o {}...'.format(key, pathlib.Path(tgt_dir, key)))
+              'o {}...'.format(key, filename))
 
+        if filename.exists():
+            print(f'File {filename} already exists, skipping download...')
+            return
+        
+        print('\nDownloading s3://arxiv/{} to {}...'.format(key, filename))
+        
         try:
             self.s3resource.meta.client.download_file(
                 Bucket='arxiv',
