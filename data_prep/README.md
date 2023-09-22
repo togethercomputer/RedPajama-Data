@@ -10,7 +10,7 @@ We follow the [Llama paper](https://arxiv.org/abs/2302.13971) and tried our best
 
 ### Commoncrawl
 
-We downlaod five dumps from Commoncrawl, and run the dumps through the official [`cc_net` pipeline](https://github.com/facebookresearch/cc_net).
+We download five dumps from Commoncrawl, and run the dumps through the official [`cc_net` pipeline](https://github.com/facebookresearch/cc_net).
 We then deduplicate on the paragraph level, and filter out low quality text using a linear classifier trained to 
 classify paragraphs as Wikipedia references or random Commoncrawl samples.
 
