@@ -5,14 +5,6 @@ __pycache__/
 *.pyc
 *.DS_Store
 
-# data folders
-data/*
-!data/.gitkeep
-
-# notebooks
-notebooks/*
-.ipynb_checkpoints
-
 # Environments
 .env
 .venv
@@ -26,7 +18,10 @@ venv.bak/
 .idea/
 .vscode/
 
-# distribution
-*.egg-info/
-dist/
-build/
+# jupyter notebook
+notebooks/
+.ipynb_checkpoints/
+*.ipynb
+
+# debugging
+debugging/

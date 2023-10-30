@@ -1,7 +1,0 @@
-boto3
-botocore
-fasttext
-joblib
-pandas
-transformers
-tabulate

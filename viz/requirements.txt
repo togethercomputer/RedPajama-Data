@@ -1,6 +1,0 @@
-meerkat-ml
-transformers
-pyarrow
-tqdm
-rich
-faiss-cpu
