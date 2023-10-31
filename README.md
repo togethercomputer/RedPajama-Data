@@ -52,7 +52,7 @@ docker build -t "${DOCKER_REPO}:" .
 
 Also, make sure you have `s5cmd` installed and your S3 profile configured so that you can pull data from an S3 bucket.
 
-You can run the steps of the pipeline without any containerized enviornment. However, the running scripts assume you
+You can run the steps of the pipeline without any containerized environment. However, the running scripts assume you
 have a docker and apptainer installation.
 
 ## Running the Pipeline
