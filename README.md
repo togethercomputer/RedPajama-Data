@@ -5,7 +5,7 @@
 This repository contains the code for the RedPajama-V2 dataset. For more information on the dataset, check out our
 [blog post](https://together.ai/blog/redpajama-data-v2). The dataset is also available on
 [HuggingFace](https://huggingface.co/datasets/togethercomputer/RedPajama-Data-V2). For the code used for the
-RedPajama-1T dataset, please refer to the `rp` branch in this repo.
+RedPajama-1T dataset, please refer to the `rp_v1` branch in this repo.
 
 ## Dataset
 
