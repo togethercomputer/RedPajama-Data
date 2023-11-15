@@ -6,6 +6,7 @@ import functools
 from tqdm import tqdm
 import multiprocessing as mp
 from multiprocessing.pool import Pool
+from urllib.parse import urlparse
 import os
 
 from utilities.io import Reader, Writer
@@ -13,7 +14,9 @@ from utilities.io.s3 import init_client
 
 
 class CCNetDownloader(object):
-    r""" TODO: docstring """
+    r"""
+    This class downloads / loads ccnet data and writes it to a jsonl file.
+    """
 
     dataset_name = "ccnet"
 
@@ -148,12 +151,16 @@ class CCNetDownloader(object):
             "tail": int(num_samples * 0.7)
         }
 
-        s3_client = init_client(
-            endpoint_url=self._endpoint_url,
-            signature_version="s3v4",
-            aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
-            aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
-        )
+        if urlparse(self._cc_input_base_uri).scheme == "s3":
+            s3_client = init_client(
+                endpoint_url=self._endpoint_url,
+                signature_version="s3v4",
+                aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+                aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
+            )
+        else:
+            s3_client = None
+
         reader = Reader(
             schema=[("raw_content", str), ("language", str)],
             s3_client=s3_client
