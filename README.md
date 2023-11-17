@@ -103,18 +103,18 @@ bash scripts/apptainer_run_quality_signals.sh \
   --max_docs -1
 ```
 
-### 3. Fuzzy Deduplication with Locality Sensitive Hashing
+### 3. Deduplication
 
 The third component of the pipeline consists of deduplication steps. Here we provide code to run exact and fuzzy
 deduplication.
 
-#### Exact deduplication using a Bloomfilter
+#### Exact Deduplication using a Bloomfilter
 
-Exact, content based deduplication is implemented in `app/src/bloomfilter.py`. It can be run independently of the
+Content based deduplication is implemented in `app/src/bloomfilter.py`. It can be run independently of the
 previous step, but the data needs to stored in an S3 bucket. For this step, from the `app` directory, run:
 
 ```bash
-python3 src/bloomfilter \
+python3 app/src/bloomfilter.py \
   --listings /path/to/listings/file.txt \
   --input_base_uri "s3://path/to/ccnet/data" \
   --output_dir "/path/to/output" \
