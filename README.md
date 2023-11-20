@@ -60,6 +60,12 @@ have a docker and apptainer installation.
 The pipeline is composed of three steps, namely 1) preparing artifacts, 2) computing quality signals, and 3)
 deduplication.
 
+**Important:** In case you are not running steps (1) and (2) with the provided scripts (i.e., docker containers built with the provided Dockerfile), make sure to set the `PYTHONHASHSEED` environment variable to a consistent value (e.g., 42) using
+```bash
+export PYTHONHASHSEED=42
+```
+This is to ensure consistency of hash functions used in the computation of DSIR weights.
+
 ### 1. Create Artifacts
 
 This part of the pipeline creates the artifacts that are used in the subsequent steps. This includes building quality
