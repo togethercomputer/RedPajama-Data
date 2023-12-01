@@ -63,8 +63,7 @@ def parse_arguments():
         help="Number of samples to use for classifiers"
     )
     parser.add_argument(
-        "--endpoint_url", type=nullable_string,
-        default=None,
+        "--endpoint_url", type=nullable_string, default=None,
         help="endpoint url where the s3 bucket is exposed."
     )
 
@@ -88,7 +87,11 @@ def main(artifacts_dir: str, cc_input: str, cc_input_base_uri: str,
          classifiers_num_samples: int, max_samples_per_book: int,
          max_paragraphs_per_book_sample: int
          ):
-    max_workers = min(max_workers, os.cpu_count() - 2)
+    if max_workers is None:
+        max_workers = os.cpu_count() - 2
+    else:
+        max_workers = min(max_workers, os.cpu_count() - 2)
+
     # parse config
     num_samples = max(dsir_num_samples, classifiers_num_samples)
 
