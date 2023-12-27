@@ -55,7 +55,7 @@ set +a
 
 # run pipeline
 apptainer run --memory 480g "${DOCKER_REPO}" \
-  python3 src/lsh.py \
+  python3 src/run_lsh.py \
   --listings "${LISTINGS}" \
   --input_base_uri "${INPUT_BASE_URI}" \
   --output_dir "${OUTPUT_DIR}" \
