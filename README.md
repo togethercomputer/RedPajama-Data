@@ -74,7 +74,7 @@ from the [LDNOOBW repo](https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene
 the most recent list of blacklisted urls from the [UT1 blacklist](https://dsi.ut-capitole.fr/blacklists/).
 
 As a first step, download the english wikipedia reference classifier
-from [here](https://drive.google.com/file/d/1DnsfpWWE0jFPCoYe6clwqb3Ub5Ac92s1/view?usp=share_link) and place it
+from [here](https://data.together.xyz/redpajama-data-v2/v1.0.0/artifacts/wikiref.model.bin) and place it
 in `${DATA_ROOT}/wikiref-model/en/en-model.bin`. This is the same fasttext classifier that was used in RedPajama-V1.
 
 To create the remaining artifacts, make sure that the environment variables are set in the config file. Then, from
