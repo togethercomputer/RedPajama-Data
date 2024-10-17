@@ -1,0 +1,20 @@
+name: Linear PR Checker
+# If the PR Checker is not functioning properly, adding SKIP_LINEAR_CHECK
+# to the body will skip the check.  Only use this when you are certain linear
+# tickets are properly attached to the PR. 
+
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./pr_checker
+
+jobs:
+  linear_pr_checker:
+    uses: togethercomputer/tools/.github/workflows/pr_checker.yml@main
+    secrets: inherit
