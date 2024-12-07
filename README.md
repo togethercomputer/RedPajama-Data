@@ -251,12 +251,11 @@ the [Common Crawl Foundation Terms of Use](https://commoncrawl.org/terms-of-use)
 To cite RedPajama, please use:
 
 ```
-@software{together2023redpajama,
-  author = {Together Computer},
-  title = {RedPajama: an Open Dataset for Training Large Language Models},
-  month = October,
-  year = 2023,
-  url = {https://github.com/togethercomputer/RedPajama-Data}
+@article{weber2024redpajama,
+	title   = {RedPajama: an Open Dataset for Training Large Language Models},
+	author  = {Maurice Weber and Daniel Y. Fu and Quentin Anthony and Yonatan Oren and Shane Adams and Anton Alexandrov and Xiaozhong Lyu and Huu Nguyen and Xiaozhe Yao and Virginia Adams and Ben Athiwaratkun and Rahul Chalamala and Kezhen Chen and Max Ryabinin and Tri Dao and Percy Liang and Christopher Ré and Irina Rish and Ce Zhang},
+	journal = {NeurIPS Datasets and Benchmarks Track},
+	year    = 2024,
 }
 ```
 
