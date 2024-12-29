@@ -103,10 +103,7 @@ the root directory of the repository, run
 ```bash
 bash scripts/apptainer_run_quality_signals.sh \
   --config configs/rp_v2.0.conf \
-  --dump_id "2022-49" \
-  --input_base_uri "file:///path/to/data/root" \
-  --output_base_uri "file:///path/to/outout/data/root" \
-  --max_docs -1
+  --dump_id "2022-49"
 ```
 
 ### 3. Deduplication
