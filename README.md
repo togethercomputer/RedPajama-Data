@@ -39,7 +39,7 @@ English, German, French, Italian, Spanish
 Copy the file `configs/rp_v2.0.conf` to e.g. `configs/default.conf` and configure the environment variables.
 These will be used throughout the pipeline.
 
-### Buid Docker image
+### Build Docker image
 
 To run with docker, build the docker image using
 
